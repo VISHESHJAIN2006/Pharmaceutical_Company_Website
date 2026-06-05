@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bennet Pharmaceuticals | Healthy People, Healthy Nation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Nunito+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#AECA1D;--green-dark:#8CA418;--green-light:#C5D84A;--green-pale:#F2F7D8;
+  --navy:#1B2E4B;--navy-mid:#243860;--navy-light:#2E4472;
+  --white:#FFFFFF;--cream:#F8FAF0;--text-muted:#6B7A8D;
+  --border-green:rgba(174,202,29,0.25);--shadow-green:0 20px 60px rgba(174,202,29,0.18);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito Sans',sans-serif;background:var(--cream);color:var(--navy);overflow-x:hidden;line-height:1.7}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:var(--green);border-radius:3px}
+
+/* ── PAGES ── */
+.page{display:none}
+.page.active{display:block}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.25rem 4rem;display:flex;align-items:center;justify-content:space-between;transition:all 0.4s;background:rgba(27,46,75,0.15);backdrop-filter:blur(8px)}
+nav.scrolled{background:rgba(27,46,75,0.98);padding:0.9rem 4rem;box-shadow:0 4px 30px rgba(0,0,0,0.25)}
+nav.dark{background:rgba(27,46,75,0.98)!important}
+.nav-logo img{height:44px;display:block;filter:brightness(0) invert(1)}
+nav.scrolled .nav-logo img,nav.dark .nav-logo img{filter:none}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none;position:relative}
+.nav-links a{color:rgba(255,255,255,0.9);text-decoration:none;font-size:0.85rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;transition:color 0.3s;position:relative;cursor:pointer}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--green);transition:width 0.3s}
+.nav-links a:hover{color:var(--green)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{background:var(--green)!important;color:var(--navy)!important;padding:0.6rem 1.4rem;border-radius:2rem;font-weight:700!important}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{background:var(--green-light)!important}
+/* Dropdown */
+.nav-dropdown{position:relative}
+.nav-dropdown-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:rgba(27,46,75,0.98);backdrop-filter:blur(12px);border:1px solid rgba(174,202,29,0.2);border-radius:12px;padding:0.75rem 0.5rem 0.5rem;min-width:190px;z-index:500}
+.nav-dropdown-menu::before{content:'';position:absolute;top:-12px;left:0;right:0;height:12px}
+.nav-dropdown-menu.open{display:flex;flex-direction:column;gap:2px}
+.nav-dropdown-menu a{padding:0.65rem 1rem;border-radius:8px;font-size:0.82rem;white-space:nowrap;color:rgba(255,255,255,0.85)!important;cursor:pointer;transition:background 0.2s,color 0.2s}
+.nav-dropdown-menu a::after{display:none!important}
+.nav-dropdown-menu a:hover{background:rgba(174,202,29,0.14);color:var(--green)!important}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:0.5rem}
+.nav-toggle span{display:block;width:24px;height:2px;background:var(--white)}
+
+/* ── SHARED LAYOUT ── */
+section{padding:7rem 4rem}
+.sc{max-width:1200px;margin:0 auto}
+.stag{display:inline-flex;align-items:center;gap:0.6rem;margin-bottom:1rem}
+.stag::before{content:'';display:block;width:24px;height:2.5px;background:var(--green)}
+.stag span{font-size:0.75rem;font-weight:700;color:var(--green-dark);letter-spacing:0.12em;text-transform:uppercase}
+.stitle{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:400;color:var(--navy);line-height:1.2;margin-bottom:1.5rem}
+.stitle em{font-style:italic;color:var(--green-dark)}
+.ssub{font-size:1.05rem;color:var(--text-muted);line-height:1.8;max-width:560px}
+.btn-primary{display:inline-block;background:var(--green);color:var(--navy);padding:0.9rem 2rem;border-radius:2rem;font-weight:700;font-size:0.9rem;text-decoration:none;transition:all 0.3s;border:none;cursor:pointer;font-family:'Nunito Sans',sans-serif;letter-spacing:0.03em}
+.btn-primary:hover{background:var(--green-light);transform:translateY(-2px);box-shadow:var(--shadow-green)}
+.btn-outline{display:inline-block;border:1.5px solid rgba(255,255,255,0.3);color:var(--white);padding:0.9rem 2rem;border-radius:2rem;font-weight:600;font-size:0.9rem;text-decoration:none;transition:all 0.3s;cursor:pointer}
+.btn-outline:hover{border-color:var(--green);color:var(--green)}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(40px);transition:all 0.7s cubic-bezier(0.16,1,0.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.rd1{transition-delay:0.1s}.rd2{transition-delay:0.2s}.rd3{transition-delay:0.3s}.rd4{transition-delay:0.4s}
+
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+#hero{min-height:100vh;background:var(--navy);position:relative;display:flex;align-items:center;overflow:hidden}
+.hero-bg-grid{position:absolute;inset:0;opacity:0.05;pointer-events:none}
+.hero-bg-grid svg{width:100%;height:100%}
+.hero-orb-1{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(174,202,29,0.14) 0%,transparent 70%);top:-150px;right:-150px;pointer-events:none}
+.hero-orb-2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(174,202,29,0.08) 0%,transparent 70%);bottom:-80px;left:5%;pointer-events:none}
+.hero-container{max-width:1200px;margin:0 auto;padding:0 4rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;width:100%;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(174,202,29,0.12);border:1px solid rgba(174,202,29,0.35);padding:0.4rem 1.1rem;border-radius:2rem;margin-bottom:2rem}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+.hero-badge span{font-size:0.75rem;font-weight:700;color:var(--green-light);letter-spacing:0.1em;text-transform:uppercase}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:4.8rem;font-weight:300;color:var(--white);line-height:1.05;margin-bottom:1.5rem}
+.hero-title em{font-style:italic;color:var(--green-light)}
+.hero-title strong{font-weight:700;display:block}
+.hero-subtitle{font-size:1.05rem;color:rgba(255,255,255,0.6);line-height:1.85;margin-bottom:2.5rem;max-width:460px}
+.hero-actions{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.hero-visual{position:relative;display:flex;justify-content:center}
+.hero-img-card{border-radius:24px;overflow:hidden;border:2px solid rgba(174,202,29,0.2);box-shadow:0 40px 80px rgba(0,0,0,0.4)}
+.hero-img-card img{width:100%;height:420px;object-fit:cover;display:block}
+.hero-stat-pill{position:absolute;background:rgba(27,46,75,0.92);backdrop-filter:blur(12px);border:1px solid rgba(174,202,29,0.3);border-radius:1rem;padding:0.75rem 1.25rem;display:flex;align-items:center;gap:0.75rem}
+.hsp1{top:1.5rem;right:-2.5rem}.hsp2{bottom:5rem;left:-3rem}
+.pill-icon{width:34px;height:34px;border-radius:50%;background:rgba(174,202,29,0.15);display:flex;align-items:center;justify-content:center;font-size:1rem}
+.pill-num{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--white);line-height:1}
+.pill-label{font-size:0.7rem;color:rgba(255,255,255,0.5)}
+.hero-scroll{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.5rem;opacity:0.5}
+.hero-scroll span{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--white)}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,0.6),transparent);animation:sd 1.5s infinite}
+@keyframes sd{0%{transform:translateY(-10px);opacity:0}50%{opacity:1}100%{transform:translateY(10px);opacity:0}}
+.hfi{opacity:0;transform:translateY(30px);animation:fu 0.9s forwards}
+.hfi:nth-child(1){animation-delay:0.2s}.hfi:nth-child(2){animation-delay:0.4s}.hfi:nth-child(3){animation-delay:0.6s}.hfi:nth-child(4){animation-delay:0.8s}
+@keyframes fu{to{opacity:1;transform:translateY(0)}}
+
+/* ══════════════════════════════════════
+   STATS STRIP
+══════════════════════════════════════ */
+#stats{background:var(--green);padding:2.5rem 4rem}
+.stats-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+.stat-item{text-align:center;position:relative;padding:0.5rem 1rem}
+.stat-item:not(:last-child)::after{content:'';position:absolute;right:0;top:15%;bottom:15%;width:1px;background:rgba(27,46,75,0.15)}
+.stat-number{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;color:var(--navy);line-height:1;display:block}
+.stat-label{font-size:0.72rem;font-weight:700;color:rgba(27,46,75,0.6);letter-spacing:0.09em;text-transform:uppercase;margin-top:0.3rem;display:block}
+
+/* ══════════════════════════════════════
+   ABOUT
+══════════════════════════════════════ */
+#about{background:var(--white)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.about-img-wrap{position:relative}
+.about-img-wrap img{width:100%;border-radius:20px;display:block;object-fit:cover;height:480px;box-shadow:0 30px 70px rgba(27,46,75,0.15)}
+.about-badge-box{position:absolute;bottom:-1.5rem;right:-1.5rem;background:var(--navy);border-radius:16px;padding:1.5rem 2rem;text-align:center;border:3px solid var(--green)}
+.about-badge-num{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;color:var(--green);line-height:1}
+.about-badge-text{font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-top:0.2rem}
+.about-text-p{color:var(--text-muted);margin-bottom:1.2rem;font-size:1rem;line-height:1.85}
+.about-chips{display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:2rem}
+.chip{background:var(--green-pale);border:1px solid var(--border-green);color:var(--navy);padding:0.45rem 1rem;border-radius:2rem;font-size:0.8rem;font-weight:700}
+.chip::before{content:'✓ ';color:var(--green-dark)}
+
+/* ══════════════════════════════════════
+   CORE VALUES — animated flip cards
+══════════════════════════════════════ */
+#values{background:var(--navy);padding:6rem 4rem}
+.values-intro{text-align:center;margin-bottom:4rem}
+.values-intro h2{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:var(--white);margin-bottom:0.5rem}
+.values-intro h2 em{font-style:italic;color:var(--green-light)}
+.values-intro p{color:rgba(255,255,255,0.5);font-size:0.95rem}
+.values-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem}
+/* Flip card */
+.vcard{height:260px;perspective:1000px;cursor:default}
+.vcard-inner{position:relative;width:100%;height:100%;transition:transform 0.7s cubic-bezier(0.4,0.2,0.2,1);transform-style:preserve-3d}
+.vcard:hover .vcard-inner,.vcard.flipped .vcard-inner{transform:rotateY(180deg)}
+.vcard-front,.vcard-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;padding:2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.vcard-front{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1)}
+.vcard-back{background:var(--green);border:1px solid var(--green);transform:rotateY(180deg)}
+.vcard-icon{font-size:2.5rem;margin-bottom:1rem}
+.vcard-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--white)}
+.vcard-line{width:28px;height:2px;background:var(--green);margin:0.75rem auto 0}
+.vcard-back .vcard-icon{font-size:1.8rem;margin-bottom:0.75rem}
+.vcard-back .vcard-name{color:var(--navy);font-size:1.15rem;margin-bottom:0.6rem}
+.vcard-desc{font-size:0.82rem;color:var(--navy);line-height:1.65;opacity:0.85}
+/* Scroll-trigger animation */
+.vcard{opacity:0;transform:translateY(50px);transition:opacity 0.6s ease, transform 0.6s ease}
+.vcard.in-view{opacity:1;transform:translateY(0)}
+.vcard:nth-child(1){transition-delay:0s}
+.vcard:nth-child(2){transition-delay:0.12s}
+.vcard:nth-child(3){transition-delay:0.24s}
+.vcard:nth-child(4){transition-delay:0.36s}
+.vcard:nth-child(5){transition-delay:0.48s}
+
+/* ══════════════════════════════════════
+   CAPABILITIES (home section overview)
+══════════════════════════════════════ */
+#capabilities{background:var(--cream)}
+.cap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem}
+.cap-card{background:var(--white);border-radius:20px;padding:2.5rem 2rem;border:2px solid transparent;transition:all 0.35s;cursor:pointer;position:relative;overflow:hidden;text-decoration:none;display:block}
+.cap-card::after{content:'→';position:absolute;bottom:1.75rem;right:2rem;font-size:1.2rem;font-weight:700;color:var(--green);opacity:0;transition:all 0.3s;transform:translateX(-8px)}
+.cap-card:hover{border-color:var(--green);transform:translateY(-6px);box-shadow:var(--shadow-green)}
+.cap-card:hover::after{opacity:1;transform:translateX(0)}
+.cap-icon{width:56px;height:56px;border-radius:14px;background:var(--green-pale);display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin-bottom:1.5rem}
+.cap-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--navy);margin-bottom:0.4rem}
+.cap-tag{font-size:0.7rem;font-weight:700;color:var(--green-dark);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.75rem}
+.cap-desc{font-size:0.875rem;color:var(--text-muted);line-height:1.7}
+
+/* ══════════════════════════════════════
+   LIFE @ BENNET — zoom on hover + lightbox
+══════════════════════════════════════ */
+#life{background:var(--navy);padding:6rem 4rem}
+.life-hdr{max-width:1200px;margin:0 auto 3rem;display:flex;justify-content:space-between;align-items:flex-end}
+.life-title{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:var(--white)}
+.life-title em{font-style:italic;color:var(--green-light)}
+.life-perks{max-width:1200px;margin:0 auto 3rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.lperk{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.5rem;transition:all 0.3s}
+.lperk:hover{background:rgba(174,202,29,0.08);border-color:rgba(174,202,29,0.25)}
+.lperk-img-wrap{overflow:hidden;border-radius:10px;margin-bottom:1rem;height:140px}
+.lperk-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s ease}
+.lperk:hover .lperk-img-wrap img{transform:scale(1.08)}
+.lperk-title{font-weight:700;color:var(--white);font-size:0.95rem;margin-bottom:0.4rem}
+.lperk-desc{font-size:0.82rem;color:rgba(255,255,255,0.5);line-height:1.65}
+/* Gallery */
+.gallery-label-row{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
+.gallery-label-row h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:var(--white)}
+.gallery-label-row span{display:block;width:60px;height:2px;background:var(--green)}
+.gallery-cols{max-width:1200px;margin:0 auto;columns:5;column-gap:0.75rem}
+.gitem{break-inside:avoid;margin-bottom:0.75rem;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.06);position:relative;cursor:pointer}
+.gitem-inner{overflow:hidden;border-radius:12px}
+.gitem img{width:100%;display:block;transition:transform 0.5s ease;object-fit:cover}
+.gitem:hover img{transform:scale(1.12)}
+.goverlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(27,46,75,0.85),transparent 60%);opacity:0;transition:opacity 0.3s;display:flex;align-items:flex-end;padding:0.75rem;pointer-events:none}
+.gitem:hover .goverlay{opacity:1}
+.gnum{font-size:0.7rem;font-weight:700;color:var(--green-light);letter-spacing:0.08em}
+
+/* Lightbox */
+#lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;display:none;align-items:center;justify-content:center;padding:2rem}
+#lightbox.open{display:flex}
+.lb-img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:12px;box-shadow:0 40px 80px rgba(0,0,0,0.5);animation:lbIn 0.3s ease}
+@keyframes lbIn{from{opacity:0;transform:scale(0.92)}to{opacity:1;transform:scale(1)}}
+.lb-close{position:fixed;top:1.5rem;right:2rem;font-size:2rem;color:var(--white);cursor:pointer;opacity:0.7;transition:opacity 0.2s;z-index:10000;background:none;border:none;font-family:sans-serif}
+.lb-close:hover{opacity:1}
+.lb-prev,.lb-next{position:fixed;top:50%;transform:translateY(-50%);font-size:2rem;color:var(--white);cursor:pointer;background:rgba(27,46,75,0.6);border:none;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:10000;transition:all 0.2s}
+.lb-prev{left:1rem}.lb-next{right:1rem}
+.lb-prev:hover,.lb-next:hover{background:var(--green);color:var(--navy)}
+
+/* ══════════════════════════════════════
+   TESTIMONIALS — slider
+══════════════════════════════════════ */
+#testimonials{background:var(--green-pale);padding:6rem 4rem}
+.testi-hdr{text-align:center;margin-bottom:3.5rem}
+.testi-slider{max-width:900px;margin:0 auto;position:relative}
+.testi-track{overflow:hidden;border-radius:24px}
+.testi-slides{display:flex;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1)}
+.tcard{min-width:100%;background:var(--white);border-radius:24px;padding:3rem;border:1.5px solid rgba(174,202,29,0.2);box-shadow:0 10px 40px rgba(27,46,75,0.07);position:relative}
+.tcard-qmark{font-family:'Cormorant Garamond',serif;font-size:6rem;line-height:0.6;color:var(--green);position:absolute;top:2rem;left:2.5rem;opacity:0.25}
+.tcontent{display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center}
+.tavatar{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid var(--green);display:block;flex-shrink:0}
+.tavatar-ph{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--navy-mid));border:3px solid var(--green);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:rgba(174,202,29,0.4);flex-shrink:0}
+.ttext{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:var(--navy);line-height:1.7;margin-bottom:1.25rem;padding-top:0.5rem}
+.tstar{color:var(--green);font-size:1rem;letter-spacing:2px;margin-bottom:0.75rem}
+.tauthor{font-weight:700;font-size:0.95rem;color:var(--navy);margin-bottom:0.2rem}
+.trole{font-size:0.8rem;font-weight:600;color:var(--green-dark);letter-spacing:0.07em;text-transform:uppercase}
+/* Slider controls */
+.testi-controls{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:2rem}
+.testi-btn{width:40px;height:40px;border-radius:50%;border:2px solid var(--navy);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--navy);transition:all 0.3s}
+.testi-btn:hover{background:var(--navy);color:var(--white)}
+.testi-dots{display:flex;gap:0.5rem}
+.tdot{width:8px;height:8px;border-radius:50%;background:rgba(27,46,75,0.25);cursor:pointer;transition:all 0.3s}
+.tdot.active{background:var(--navy);width:24px;border-radius:4px}
+
+/* ══════════════════════════════════════
+   CAREERS
+══════════════════════════════════════ */
+#careers{background:var(--white);padding:6rem 4rem}
+.careers-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.perks-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2.5rem}
+.perk{background:var(--cream);border-radius:16px;padding:1.5rem;border:1.5px solid rgba(27,46,75,0.06);transition:all 0.3s}
+.perk:hover{border-color:var(--green);background:var(--green-pale)}
+.perk-icon{font-size:1.5rem;margin-bottom:0.5rem}
+.perk-title{font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.25rem}
+.perk-desc{font-size:0.8rem;color:var(--text-muted)}
+.careers-visual-box{background:linear-gradient(145deg,var(--navy),var(--navy-mid));border-radius:24px;padding:3rem;color:var(--white);position:relative;overflow:hidden}
+.careers-visual-box::before{content:'30';font-family:'Cormorant Garamond',serif;font-size:14rem;font-weight:700;color:rgba(174,202,29,0.05);position:absolute;top:-3rem;right:-1rem;line-height:1;pointer-events:none}
+.cv-tag{font-size:0.75rem;font-weight:700;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem}
+.cv-title{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;line-height:1.3;margin-bottom:1rem}
+.cv-desc{font-size:0.9rem;color:rgba(255,255,255,0.6);line-height:1.8;margin-bottom:1.5rem}
+.cv-apply{display:flex;align-items:center;gap:1rem;background:rgba(255,255,255,0.06);border:1px solid rgba(174,202,29,0.25);border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:1rem}
+.cv-apply-icon{font-size:1.5rem}
+.cv-apply-label{font-size:0.72rem;font-weight:700;color:var(--green);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.2rem}
+.cv-apply-val{font-size:0.95rem;color:var(--white);font-weight:600}
+.cv-team-img{width:100%;border-radius:14px;object-fit:cover;height:180px;display:block;margin-top:1.5rem}
+
+/* ══════════════════════════════════════
+   CONTACT
+══════════════════════════════════════ */
+#contact{background:var(--cream);padding:6rem 4rem}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.cinfo{display:flex;flex-direction:column;gap:1.5rem;margin-top:2.5rem}
+.ciitem{display:flex;gap:1rem;align-items:flex-start}
+.ciicon{width:44px;height:44px;border-radius:12px;background:var(--green-pale);border:1.5px solid var(--border-green);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.cilabel{font-size:0.72rem;font-weight:700;color:var(--green-dark);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.2rem}
+.cival{font-size:0.95rem;color:var(--navy);font-weight:600}
+.cisub{font-size:0.82rem;color:var(--text-muted)}
+.cform{background:var(--white);border-radius:20px;padding:2.5rem;border:1.5px solid rgba(174,202,29,0.15)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fg{margin-bottom:1.25rem}
+.flabel{display:block;font-size:0.75rem;font-weight:700;color:var(--navy);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.5rem}
+.finput{width:100%;padding:0.875rem 1rem;border:1.5px solid rgba(27,46,75,0.1);border-radius:10px;font-family:'Nunito Sans',sans-serif;font-size:0.9rem;color:var(--navy);background:var(--cream);transition:border-color 0.3s;outline:none}
+.finput:focus{border-color:var(--green);background:var(--white)}
+.ftextarea{resize:vertical;min-height:120px}
+.fselect{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7A8D' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center}
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer{background:var(--navy);padding:4rem 4rem 2rem}
+.fgrid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,0.08)}
+.flogo img{height:42px;display:block;margin-bottom:1rem}
+.fdesc{font-size:0.875rem;color:rgba(255,255,255,0.45);line-height:1.8;margin-bottom:1.5rem;max-width:280px}
+.fsocials{display:flex;gap:0.75rem}
+.fsocial{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.3s}
+.fsocial:hover{border-color:var(--green);color:var(--green)}
+.fctitle{font-size:0.72rem;font-weight:700;color:var(--green);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.25rem}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:0.7rem}
+.flinks a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.875rem;transition:color 0.3s;cursor:pointer}
+.flinks a:hover{color:var(--green)}
+.fbot{max-width:1200px;margin:2rem auto 0;display:flex;justify-content:space-between;align-items:center}
+.fcopy{font-size:0.8rem;color:rgba(255,255,255,0.3)}
+.fbotlinks{display:flex;gap:1.5rem}
+.fbotlinks a{font-size:0.8rem;color:rgba(255,255,255,0.3);text-decoration:none}
+.fbotlinks a:hover{color:var(--white)}
+
+/* ══════════════════════════════════════
+   SUB-PAGES (SPA routing)
+══════════════════════════════════════ */
+.subpage{display:none;min-height:100vh;padding-top:80px}
+.subpage.active{display:block}
+.subpage-hero{background:var(--navy);padding:6rem 4rem 4rem;position:relative;overflow:hidden}
+.subpage-hero::before{content:'';position:absolute;inset:0;opacity:0.05}
+.subpage-hero-grid{position:absolute;inset:0;opacity:0.05}
+.subpage-hero-grid svg{width:100%;height:100%}
+.subpage-orb{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(174,202,29,0.15) 0%,transparent 70%);top:-100px;right:-100px;pointer-events:none}
+.subpage-hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:2}
+.subpage-hero-img{border-radius:20px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,0.4);border:2px solid rgba(174,202,29,0.2)}
+.subpage-hero-img img{width:100%;height:340px;object-fit:cover;display:block}
+.subpage-back{display:inline-flex;align-items:center;gap:0.5rem;color:var(--green);font-size:0.85rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;margin-bottom:1.5rem;background:none;border:none;font-family:'Nunito Sans',sans-serif;padding:0}
+.subpage-back:hover{opacity:0.8}
+.subpage-tag{font-size:0.75rem;font-weight:700;color:var(--green);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.6rem}
+.subpage-tag::before{content:'';display:block;width:20px;height:2px;background:var(--green)}
+.subpage-title{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:var(--white);line-height:1.1;margin-bottom:1rem}
+.subpage-title em{font-style:italic;color:var(--green-light)}
+.subpage-subtitle{color:rgba(255,255,255,0.6);font-size:1rem;line-height:1.8}
+.subpage-body{max-width:1200px;margin:0 auto;padding:5rem 4rem}
+
+/* Products tab system */
+.products-tabs{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2.5rem}
+.ptab{padding:0.55rem 1.1rem;border-radius:2rem;font-size:0.82rem;font-weight:700;cursor:pointer;border:1.5px solid rgba(27,46,75,0.12);background:transparent;color:var(--text-muted);transition:all 0.25s;font-family:'Nunito Sans',sans-serif}
+.ptab:hover{border-color:var(--green);color:var(--green-dark)}
+.ptab.active{background:var(--green);border-color:var(--green);color:var(--navy)}
+.ptab-content{display:none}
+.ptab-content.active{display:block}
+.medicines-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.med-card{background:var(--white);border-radius:16px;padding:1.5rem;border:1.5px solid rgba(27,46,75,0.06);transition:all 0.3s}
+.med-card:hover{border-color:var(--green);transform:translateY(-3px);box-shadow:0 12px 30px rgba(27,46,75,0.1)}
+.med-name{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--navy);margin-bottom:0.3rem}
+.med-composition{font-size:0.78rem;color:var(--text-muted);margin-bottom:0.75rem;line-height:1.5}
+.med-type{display:inline-block;font-size:0.68rem;background:var(--green-pale);color:var(--green-dark);padding:0.2rem 0.65rem;border-radius:1rem;font-weight:700;letter-spacing:0.05em}
+
+/* Network page */
+.network-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-bottom:4rem}
+.nstat{background:var(--navy);border-radius:16px;padding:2rem;text-align:center;border:1px solid rgba(174,202,29,0.15)}
+.nstat-num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:700;color:var(--green);display:block;line-height:1}
+.nstat-label{font-size:0.72rem;font-weight:700;color:rgba(255,255,255,0.55);letter-spacing:0.08em;text-transform:uppercase;margin-top:0.4rem;display:block}
+
+/* Leadership (home) */
+#leadership{background:var(--cream);padding:6rem 4rem}
+.lgrid{max-width:1200px;margin:3rem auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.lcard{background:var(--white);border-radius:20px;overflow:hidden;border:1.5px solid rgba(27,46,75,0.07);transition:all 0.3s;text-align:center}
+.lcard:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(27,46,75,0.12);border-color:var(--green)}
+.lavatar{width:100%;height:180px;background:linear-gradient(135deg,var(--navy),var(--navy-mid));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.lavatar::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 60% 30%,rgba(174,202,29,0.15),transparent 70%)}
+.linitials{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;color:rgba(174,202,29,0.35);position:relative;z-index:1}
+.linfo{padding:1.5rem}
+.lname{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--navy);margin-bottom:0.25rem}
+.lrole{font-size:0.72rem;font-weight:700;color:var(--green-dark);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.75rem}
+.ldesc{font-size:0.82rem;color:var(--text-muted);line-height:1.65}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  nav,footer{padding-left:2rem;padding-right:2rem}
+  nav.scrolled{padding-left:2rem;padding-right:2rem}
+  section{padding-left:2rem;padding-right:2rem}
+  #stats,#life,#testimonials,#careers,#contact,#leadership,#capabilities,#values{padding-left:2rem;padding-right:2rem}
+  .hero-container{padding:0 2rem;gap:3rem}
+  .hero-title{font-size:3.5rem}
+  .stats-grid{grid-template-columns:repeat(3,1fr)}
+  .about-grid,.mfg-grid,.contact-grid,.careers-grid{grid-template-columns:1fr}
+  .cap-grid,.values-grid{grid-template-columns:1fr 1fr}
+  .lgrid{grid-template-columns:1fr 1fr}
+  .life-perks{grid-template-columns:1fr 1fr}
+  .gallery-cols{columns:3}
+  .medicines-grid{grid-template-columns:1fr 1fr}
+  .network-stats{grid-template-columns:repeat(3,1fr)}
+  .subpage-hero-inner{grid-template-columns:1fr}
+  .subpage-hero-img{display:none}
+  .subpage-body{padding:3rem 2rem}
+  .fgrid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .nav-toggle{display:flex}
+  .hero-container{grid-template-columns:1fr}
+  .hero-visual{display:none}
+  .hero-title{font-size:2.8rem}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .values-grid,.cap-grid{grid-template-columns:1fr}
+  .lgrid{grid-template-columns:1fr 1fr}
+  .life-perks,.perks-grid{grid-template-columns:1fr}
+  .gallery-cols{columns:2}
+  .tcontent{grid-template-columns:1fr;text-align:center}
+  .tavatar,.tavatar-ph{margin:0 auto}
+  .medicines-grid{grid-template-columns:1fr}
+  .network-stats{grid-template-columns:1fr 1fr}
+  .form-row{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:1fr}
+  .fbot{flex-direction:column;gap:1rem;text-align:center}
+  .life-hdr{flex-direction:column;gap:1rem;align-items:flex-start}
+  .subpage-hero{padding:5rem 2rem 3rem}
+  .subpage-title{font-size:2.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <button class="lb-prev" onclick="lbNav(-1)">‹</button>
+  <img class="lb-img" id="lb-img" src="" alt="">
+  <button class="lb-next" onclick="lbNav(1)">›</button>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="#" onclick="showPage('home')"><img src="https://bennetpharmaceuticals.com/bennet.png" alt="Bennet Pharmaceuticals" onerror="this.src='';this.parentElement.innerHTML='<span style=\'font-family:Cormorant Garamond,serif;font-size:1.2rem;font-weight:700;color:var(--green)\'>Bennet</span>'"></a>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home');scrollToSection('about')">About</a></li>
+    <li class="nav-dropdown" id="capDropdown">
+      <a onclick="toggleDropdown(event)">Our Capabilities ▾</a>
+      <div class="nav-dropdown-menu" id="capMenu">
+        <a onclick="showSubpage('innovation');closeDropdown()">🔬 Innovation</a>
+        <a onclick="showSubpage('manufacturing');closeDropdown()">🏭 Manufacturing</a>
+        <a onclick="showSubpage('products');closeDropdown()">💊 Products</a>
+        <a onclick="showSubpage('network');closeDropdown()">🌐 Network</a>
+      </div>
+    </li>
+    <li><a onclick="showPage('home');scrollToSection('life')">Life @ Bennet</a></li>
+    <li><a onclick="showPage('home');scrollToSection('careers')">Careers</a></li>
+    <li><a onclick="showPage('home');scrollToSection('contact')" class="nav-cta">Contact Us</a></li>
+  </ul>
+  <div class="nav-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- ═══════════════ HOME PAGE ═══════════════ -->
+<div id="page-home" class="page active">
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-grid"><svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice"><defs><pattern id="g" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(174,202,29,1)" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#g)"/></svg></div>
+  <div class="hero-orb-1"></div><div class="hero-orb-2"></div>
+  <div class="hero-container">
+    <div>
+      <div class="hero-badge hfi"><div class="hero-badge-dot"></div><span>Trusted Since 1996 · Vadodara, Gujarat</span></div>
+      <h1 class="hero-title hfi">A Legacy of<br><em>Healthcare</em><br><strong>Together We Heal.</strong></h1>
+      <p class="hero-subtitle hfi">For three decades, Bennet Pharmaceuticals has been at the forefront of India's healthcare mission — delivering high-quality, affordable medicines that reach every corner of the nation.</p>
+      <div class="hero-actions hfi">
+        <a class="btn-primary" onclick="showSubpage('products')">Explore Our Capabilities</a>
+        <a class="btn-outline" onclick="scrollToSection('contact')">Partner With Us</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div style="position:relative">
+        <div class="hero-img-card"><img src="https://bennetpharmaceuticals.com/about.png" alt="Bennet Pharmaceuticals"></div>
+        <div class="hero-stat-pill hsp1"><div class="pill-icon">🏭</div><div><div class="pill-num">3</div><div class="pill-label">Divisions</div></div></div>
+        <div class="hero-stat-pill hsp2"><div class="pill-icon">🌍</div><div><div class="pill-num">30+</div><div class="pill-label">Years of excellence</div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- STATS -->
+<div id="stats">
+  <div class="stats-grid">
+    <div class="stat-item reveal"><span class="stat-number"><span class="counter" data-target="500">0</span>+</span><span class="stat-label">SKUs &amp; Products</span></div>
+    <div class="stat-item reveal rd1"><span class="stat-number"><span class="counter" data-target="500">0</span>+</span><span class="stat-label">Sales Personnel</span></div>
+    <div class="stat-item reveal rd2"><span class="stat-number"><span class="counter" data-target="1000">0</span>+</span><span class="stat-label">Distributor Network</span></div>
+    <div class="stat-item reveal rd3"><span class="stat-number"><span class="counter" data-target="100000">0</span>+</span><span class="stat-label">Retail Outlets</span></div>
+    <div class="stat-item reveal rd4"><span class="stat-number"><span class="counter" data-target="15">0</span>+</span><span class="stat-label">States Covered</span></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sc">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal">
+        <img src="https://bennetpharmaceuticals.com/about.png" alt="Bennet Pharmaceuticals">
+        <div class="about-badge-box"><div class="about-badge-num">30</div><div class="about-badge-text">Years of Trust</div></div>
+      </div>
+      <div class="reveal rd2">
+        <div class="stag"><span>Our Story</span></div>
+        <h2 class="stitle">Your Health,<br>Our <em>Priority</em></h2>
+        <p class="about-text-p">We provide high-quality healthcare solutions at prices that are accessible to all. Our team upholds the highest standards of ethical practices, with certifications and strict adherence to regulatory standards, ensuring your well-being in every interaction.</p>
+        <p class="about-text-p">We offer tailored solutions through our three core divisions: Ethical, Critical Care, and the Emiror Division, bringing specialised and innovative care to those who need it most.</p>
+        <p class="about-text-p">With over 1,00,000 retail outlets nationwide and a network spanning 15+ states, we bring superior healthcare solutions within easy reach for everyone.</p>
+        <div class="about-chips">
+          <div class="chip">WHO-GMP Certified</div><div class="chip">ISO Certified</div><div class="chip">Export Ready</div><div class="chip">Baddi &amp; Vadodara Plants</div>
+        </div>
+        <div style="margin-top:2.5rem"><a class="btn-primary" onclick="scrollToSection('contact')">Get In Touch</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CORE VALUES -->
+<section id="values">
+  <div class="values-intro reveal">
+    <div class="stag" style="justify-content:center"><span style="color:rgba(174,202,29,0.8)">Core Values</span></div>
+    <h2>The Principles that <em>Guide Us</em></h2>
+    <p>At Bennet, our core values shape our culture and ensure we deliver exceptional healthcare solutions.</p>
+  </div>
+  <div class="values-grid sc">
+    <div class="vcard" data-value="0">
+      <div class="vcard-inner">
+        <div class="vcard-front"><div class="vcard-icon">⚖️</div><div class="vcard-name">Integrity</div><div class="vcard-line"></div></div>
+        <div class="vcard-back"><div class="vcard-icon">⚖️</div><div class="vcard-name">Integrity</div><div class="vcard-desc">We uphold the highest ethical standards in every aspect of our work, ensuring transparency and honesty.</div></div>
+      </div>
+    </div>
+    <div class="vcard" data-value="1">
+      <div class="vcard-inner">
+        <div class="vcard-front"><div class="vcard-icon">🤝</div><div class="vcard-name">Collaboration</div><div class="vcard-line"></div></div>
+        <div class="vcard-back"><div class="vcard-icon">🤝</div><div class="vcard-name">Collaboration</div><div class="vcard-desc">Teamwork and partnership are at the heart of our operations, as we work together with healthcare professionals to achieve shared goals.</div></div>
+      </div>
+    </div>
+    <div class="vcard" data-value="2">
+      <div class="vcard-inner">
+        <div class="vcard-front"><div class="vcard-icon">💪</div><div class="vcard-name">Empowerment</div><div class="vcard-line"></div></div>
+        <div class="vcard-back"><div class="vcard-icon">💪</div><div class="vcard-name">Empowerment</div><div class="vcard-desc">We believe in empowering individuals — both our employees and our customers — with the tools for better health and well-being.</div></div>
+      </div>
+    </div>
+    <div class="vcard" data-value="3">
+      <div class="vcard-inner">
+        <div class="vcard-front"><div class="vcard-icon">🏆</div><div class="vcard-name">Excellence</div><div class="vcard-line"></div></div>
+        <div class="vcard-back"><div class="vcard-icon">🏆</div><div class="vcard-name">Excellence</div><div class="vcard-desc">Our commitment to excellence drives us to deliver high-quality products that consistently exceed expectations, setting new standards.</div></div>
+      </div>
+    </div>
+    <div class="vcard" data-value="4">
+      <div class="vcard-inner">
+        <div class="vcard-front"><div class="vcard-icon">💡</div><div class="vcard-name">Innovation</div><div class="vcard-line"></div></div>
+        <div class="vcard-back"><div class="vcard-icon">💡</div><div class="vcard-name">Innovation</div><div class="vcard-desc">We embrace creativity and forward-thinking, driving continuous improvement in our pharmaceutical solutions to meet evolving challenges.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES OVERVIEW -->
+<section id="capabilities">
+  <div class="sc">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:0">
+      <div class="reveal"><div class="stag"><span>Our Capabilities</span></div><h2 class="stitle">Explore What <em>We Do Best</em></h2></div>
+      <p class="ssub reveal rd2">From research and innovation to manufacturing, distribution and a broad product portfolio — every aspect of Bennet is built to serve healthcare better.</p>
+    </div>
+    <div class="cap-grid">
+      <div class="cap-card reveal" onclick="showSubpage('innovation')">
+        <div class="cap-icon">🔬</div><div class="cap-name">Innovation</div><div class="cap-tag">Research &amp; Patents</div>
+        <p class="cap-desc">Patent-granted research in collaboration with NIPER-A. Breakthroughs in bioavailability and wound healing technology.</p>
+      </div>
+      <div class="cap-card reveal rd1" onclick="showSubpage('manufacturing')">
+        <div class="cap-icon">🏭</div><div class="cap-name">Manufacturing</div><div class="cap-tag">WHO-GMP Certified</div>
+        <p class="cap-desc">State-of-the-art manufacturing at Baddi and Vadodara, producing tablets, capsules, injectables, and more.</p>
+      </div>
+      <div class="cap-card reveal rd2" onclick="showSubpage('products')">
+        <div class="cap-icon">💊</div><div class="cap-name">Products</div><div class="cap-tag">500+ SKUs</div>
+        <p class="cap-desc">Broad portfolio spanning 11 therapeutic areas for general practitioners, specialists, surgeons and more.</p>
+      </div>
+      <div class="cap-card reveal rd3" onclick="showSubpage('network')">
+        <div class="cap-icon">🌐</div><div class="cap-name">Network</div><div class="cap-tag">15+ States</div>
+        <p class="cap-desc">1000+ distributors, 1,00,000+ retail outlets, and an expanding global export presence across Asia, Africa &amp; Latin America.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section id="leadership">
+  <div class="sc">
+    <div style="text-align:center" class="reveal">
+      <div class="stag" style="justify-content:center"><span>Leadership</span></div>
+      <h2 class="stitle" style="text-align:center">Innovation Meets <em>Compassion</em></h2>
+      <p class="ssub" style="margin:0 auto;text-align:center">Our exceptional teams, led by visionary directors, drive Bennet's mission forward every day.</p>
+    </div>
+    <div class="lgrid">
+      <div class="lcard reveal rd1"><div class="lavatar"><div class="linitials">JJ</div></div><div class="linfo"><div class="lname">Mr. J. K. Jain</div><div class="lrole">Founder &amp; Promoter Director</div><p class="ldesc">A visionary leader who established Bennet's foundation. His innovative approach continues to guide the company's growth and success.</p></div></div>
+      <div class="lcard reveal rd2"><div class="lavatar"><div class="linitials">SJ</div></div><div class="linfo"><div class="lname">Mr. Siddharth Jain</div><div class="lrole">Technical Director</div><p class="ldesc">Overseeing supply chain, regulatory affairs, and quality control. Ensures smooth operations across all technical aspects.</p></div></div>
+      <div class="lcard reveal rd3"><div class="lavatar"><div class="linitials">VrJ</div></div><div class="linfo"><div class="lname">Mrs. Vrushti Jain</div><div class="lrole">Creative Director</div><p class="ldesc">An innovative thinker spearheading new product development and marketing initiatives, driving expansion into cutting-edge solutions.</p></div></div>
+      <div class="lcard reveal rd4"><div class="lavatar"><div class="linitials">VaJ</div></div><div class="linfo"><div class="lname">Mrs. Vaishali Jain</div><div class="lrole">Director – Finance &amp; Marketing</div><p class="ldesc">Oversees finance and marketing, balancing profitability with competitive market presence for long-term business success.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LIFE @ BENNET -->
+<section id="life">
+  <div class="life-hdr">
+    <div>
+      <div class="stag" style="margin-bottom:0.75rem"><span style="color:var(--green)">Our Culture</span></div>
+      <h2 class="life-title reveal">Life at <em>Bennet</em></h2>
+    </div>
+    <p style="color:rgba(255,255,255,0.45);font-size:0.9rem;max-width:280px;line-height:1.7;text-align:right" class="reveal rd2">Empowering people, celebrating growth — together we thrive, together we succeed.</p>
+  </div>
+  <div class="life-perks reveal rd1">
+    <div class="lperk"><div class="lperk-img-wrap"><img src="https://bennetpharmaceuticals.com/learning1.jpg" alt="Continuous Learning" onerror="this.style.display='none'"></div><div class="lperk-title">Continuous Learning</div><div class="lperk-desc">We invest in your professional development through mentorship and training programs.</div></div>
+    <div class="lperk"><div class="lperk-img-wrap"><img src="https://bennetpharmaceuticals.com/reward1.jpg" alt="Recognition and Rewards" onerror="this.style.display='none'"></div><div class="lperk-title">Recognition &amp; Rewards</div><div class="lperk-desc">Your achievements are celebrated, and your contributions are valued every step of the way.</div></div>
+    <div class="lperk"><div class="lperk-img-wrap"><img src="https://bennetpharmaceuticals.com/worklife1.jpg" alt="Work Life Balance" onerror="this.style.display='none'"></div><div class="lperk-title">Work-Life Balance</div><div class="lperk-desc">We believe in a healthy work-life harmony that empowers you to excel in all aspects of life.</div></div>
+    <div class="lperk"><div class="lperk-img-wrap"><img src="https://bennetpharmaceuticals.com/strength2.jpg" alt="Our Strength" onerror="this.style.display='none'"></div><div class="lperk-title">Our Strength</div><div class="lperk-desc">Our people are our greatest strength — a passionate team united by a common purpose.</div></div>
+  </div>
+  <div class="gallery-label-row"><h3>Our Events Gallery</h3><span></span></div>
+  <div class="gallery-cols" id="galleryGrid">
+    <!-- injected by JS -->
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="sc">
+    <div class="testi-hdr reveal">
+      <div class="stag" style="justify-content:center"><span>Testimonials</span></div>
+      <h2 class="stitle" style="text-align:center">Voices of the <em>Bennet Family</em></h2>
+    </div>
+    <div class="testi-slider reveal rd1">
+      <div class="testi-track">
+        <div class="testi-slides" id="testiSlides">
+          <!-- Slide 1 -->
+          <div class="tcard">
+            <div class="tcard-qmark">"</div>
+            <div class="tcontent">
+              <img src="https://bennetpharmaceuticals.com/rajesh-kaushik.jpg" alt="Rajesh Kaushik" class="tavatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="tavatar-ph">RK</div>
+              <div><div class="tstar">★★★★★</div><p class="ttext">"I've spent 25 years in the pharma industry. Working at Bennet has been a different experience altogether. The culture here is open, respectful, and positive. People value each other. I enjoy being part of the Bennet family."</p><div class="tauthor">Rajesh Kaushik</div><div class="trole">ZSM – Rajasthan</div></div>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="tcard">
+            <div class="tcard-qmark">"</div>
+            <div class="tcontent">
+              <div class="tavatar-ph" style="display:flex">AK</div>
+              <div><div class="tstar">★★★★★</div><p class="ttext">"Joining Bennet was the best career decision I ever made. The leadership is supportive, the products are genuinely making a difference, and every day I feel proud to be contributing to better healthcare across India."</p><div class="tauthor">Amit Kumar</div><div class="trole">Regional Sales Manager – UP &amp; Bihar</div></div>
+            </div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="tcard">
+            <div class="tcard-qmark">"</div>
+            <div class="tcontent">
+              <div class="tavatar-ph" style="display:flex">PS</div>
+              <div><div class="tstar">★★★★★</div><p class="ttext">"What sets Bennet apart is the genuine care they have for their people. Learning and growth opportunities are abundant, and the team spirit here is unmatched. I've grown both professionally and personally."</p><div class="tauthor">Priya Sharma</div><div class="trole">Medical Representative – Maharashtra</div></div>
+            </div>
+          </div>
+          <!-- Slide 4 -->
+          <div class="tcard">
+            <div class="tcard-qmark">"</div>
+            <div class="tcontent">
+              <div class="tavatar-ph" style="display:flex">MV</div>
+              <div><div class="tstar">★★★★★</div><p class="ttext">"The quality of Bennet's products consistently impresses me and my patients. Their dedication to innovation and affordability makes them a trusted partner in our practice. A company that truly walks its talk."</p><div class="tauthor">Dr. Mahesh Verma</div><div class="trole">General Practitioner – Gujarat</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-controls">
+        <button class="testi-btn" onclick="testiNav(-1)">‹</button>
+        <div class="testi-dots" id="testiDots"></div>
+        <button class="testi-btn" onclick="testiNav(1)">›</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREERS -->
+<section id="careers">
+  <div class="sc">
+    <div class="careers-grid">
+      <div>
+        <div class="stag reveal"><span>Careers</span></div>
+        <h2 class="stitle reveal">Join Our <em>Wonderful</em> Teams</h2>
+        <p class="ssub reveal rd1">Be part of a community where your growth is our priority. We are always looking for passionate individuals who want to make a difference in healthcare.</p>
+        <div class="perks-grid reveal rd2">
+          <div class="perk"><div class="perk-icon">📈</div><div class="perk-title">Career Growth</div><div class="perk-desc">Structured paths and internal promotion opportunities</div></div>
+          <div class="perk"><div class="perk-icon">🎓</div><div class="perk-title">Learning &amp; Dev</div><div class="perk-desc">Continuous training programs and upskilling</div></div>
+          <div class="perk"><div class="perk-icon">🏥</div><div class="perk-title">Health Benefits</div><div class="perk-desc">Comprehensive medical coverage for your family</div></div>
+          <div class="perk"><div class="perk-icon">🌍</div><div class="perk-title">Impactful Work</div><div class="perk-desc">Make healthcare accessible across India</div></div>
+        </div>
+      </div>
+      <div class="careers-visual-box reveal rd2">
+        <div class="cv-tag">Shape the Future of Healthcare</div>
+        <div class="cv-title">Together we are shaping a stronger and brighter future in healthcare.</div>
+        <p class="cv-desc">At Bennet, we recognise that our greatest asset is our people. Their dedication, passion, and expertise drive our success.</p>
+        <div class="cv-apply">
+          <div class="cv-apply-icon">📧</div>
+          <div><div class="cv-apply-label">To Apply, Send Your Resume To</div><div class="cv-apply-val">jobs.bennet@gmail.com</div></div>
+        </div>
+        <div class="cv-apply">
+          <div class="cv-apply-icon">👔</div>
+          <div><div class="cv-apply-label">HR Department</div><div class="cv-apply-val">hr@bennetpharmaceuticals.com</div></div>
+        </div>
+        <img src="https://bennetpharmaceuticals.com/GroupPhoto1.jpg" alt="Bennet Team" class="cv-team-img" onerror="this.style.display='none'">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sc">
+    <div class="contact-grid">
+      <div>
+        <div class="stag reveal"><span>Get In Touch</span></div>
+        <h2 class="stitle reveal">Let's Build a <em>Healthier</em><br>Tomorrow Together</h2>
+        <p class="ssub reveal rd1">Whether you are a healthcare professional, distributor, export partner, or potential team member — we'd love to hear from you.</p>
+        <div class="cinfo reveal rd2">
+          <div class="ciitem"><div class="ciicon">📍</div><div><div class="cilabel">Registered Office</div><div class="cival">608 B Wing, 6th Floor, Manubhai Tower</div><div class="cisub">Sayajigunj, Vadodara, Gujarat 390005</div></div></div>
+          <div class="ciitem"><div class="ciicon">📞</div><div><div class="cilabel">Phone</div><div class="cival">0265 236 1750</div><div class="cisub">Mon–Sat, 10:00–18:00</div></div></div>
+          <div class="ciitem"><div class="ciicon">✉️</div><div><div class="cilabel">General Enquiries</div><div class="cival">info@bennetpharmaceuticals.com</div></div></div>
+          <div class="ciitem"><div class="ciicon">🌐</div><div><div class="cilabel">Export Enquiries</div><div class="cival">exports@bennet.com</div></div></div>
+          <div class="ciitem"><div class="ciicon">👔</div><div><div class="cilabel">HR &amp; Careers</div><div class="cival">jobs.bennet@gmail.com</div><div class="cisub">hr@bennetpharmaceuticals.com</div></div></div>
+        </div>
+      </div>
+      <div class="reveal rd2">
+        <div class="cform" id="contactForm">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--navy);margin-bottom:1.5rem">Send Us a Message</h3>
+          <div class="form-row">
+            <div class="fg"><label class="flabel">First Name</label><input type="text" id="cf_fname" class="finput" placeholder="Your first name"></div>
+            <div class="fg"><label class="flabel">Last Name</label><input type="text" id="cf_lname" class="finput" placeholder="Your last name"></div>
+          </div>
+          <div class="fg"><label class="flabel">Email Address</label><input type="email" id="cf_email" class="finput" placeholder="your@email.com"></div>
+          <div class="fg"><label class="flabel">Phone Number</label><input type="tel" id="cf_phone" class="finput" placeholder="+91 XXXXX XXXXX"></div>
+          <div class="fg"><label class="flabel">Enquiry Type</label><select id="cf_type" class="finput fselect"><option value="">Select enquiry type</option><option>Product / Distribution</option><option>Export Partnership</option><option>Career Opportunities</option><option>Media / PR</option><option>Other</option></select></div>
+          <div class="fg"><label class="flabel">Message</label><textarea id="cf_msg" class="finput ftextarea" placeholder="Tell us how we can help you..."></textarea></div>
+          <div id="cf_status" style="display:none;padding:0.75rem 1rem;border-radius:10px;font-size:0.875rem;font-weight:600;margin-bottom:1rem;text-align:center"></div>
+          <button class="btn-primary" id="cf_btn" onclick="submitContactForm()" style="width:100%;text-align:center;display:block">Send Message →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fgrid">
+    <div>
+      <div class="flogo"><img src="https://bennetpharmaceuticals.com/bennet.png" alt="Bennet Pharmaceuticals"></div>
+      <p class="fdesc">For over three decades, we have been committed to delivering high-quality, affordable medicines that improve lives across India and beyond. Healthy People, Healthy Nation.</p>
+      <div class="fsocials">
+        <a href="https://in.linkedin.com/company/bennet-pharmaceutical-ltd" class="fsocial" target="_blank">in</a>
+        <a href="mailto:cm@bennetpharmaceuticals.com" class="fsocial">@</a>
+      </div>
+    </div>
+    <div>
+      <div class="fctitle">Company</div>
+      <ul class="flinks"><li><a onclick="scrollToSection('about')">About Us</a></li><li><a onclick="scrollToSection('values')">Core Values</a></li><li><a onclick="scrollToSection('leadership')">Leadership</a></li><li><a onclick="scrollToSection('life')">Life @ Bennet</a></li><li><a onclick="scrollToSection('careers')">Careers</a></li></ul>
+    </div>
+    <div>
+      <div class="fctitle">Capabilities</div>
+      <ul class="flinks"><li><a onclick="showSubpage('innovation')">Innovation</a></li><li><a onclick="showSubpage('manufacturing')">Manufacturing</a></li><li><a onclick="showSubpage('products')">Products</a></li><li><a onclick="showSubpage('network')">Network</a></li></ul>
+    </div>
+    <div>
+      <div class="fctitle">Connect</div>
+      <ul class="flinks"><li><a href="mailto:info@bennetpharmaceuticals.com">General Enquiries</a></li><li><a href="mailto:exports@bennet.com">Export Partnership</a></li><li><a href="mailto:jobs.bennet@gmail.com">Careers / HR</a></li><li><a href="mailto:cm@bennetpharmaceuticals.com">Media &amp; PR</a></li><li><a href="tel:02652361750">0265 236 1750</a></li></ul>
+    </div>
+  </div>
+  <div class="fbot">
+    <div class="fcopy">© 2025 Bennet Pharmaceuticals Ltd. All rights reserved. · Vadodara, Gujarat, India</div>
+    <div class="fbotlinks"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Sitemap</a></div>
+  </div>
+</footer>
+</div><!-- end #page-home -->
+
+<!-- ═══════════════ SUB-PAGES ═══════════════ -->
+
+<!-- INNOVATION -->
+<div id="page-innovation" class="page">
+  <div class="subpage-hero">
+    <div class="subpage-hero-grid"><svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice"><defs><pattern id="g2" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(174,202,29,1)" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#g2)"/></svg></div>
+    <div class="subpage-orb"></div>
+    <div class="subpage-hero-inner" style="max-width:1200px;margin:0 auto;padding:0 4rem">
+      <div>
+        <button class="subpage-back" onclick="showPage('home')">← Back to Home</button>
+        <div class="subpage-tag"><span>Our Capabilities</span></div>
+        <h1 class="subpage-title">Pioneering <em>Innovation</em></h1>
+        <p class="subpage-subtitle">Pushing the boundaries of pharmaceutical science through groundbreaking research, patents, and strategic collaborations with India's leading institutions.</p>
+      </div>
+      <div class="subpage-hero-img"><img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=700&q=80" alt="Innovation Lab"></div>
+    </div>
+  </div>
+  <div class="subpage-body">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem">
+      <div style="background:var(--white);border-radius:20px;padding:2.5rem;border:1.5px solid var(--border-green)">
+        <div style="font-size:2.5rem;margin-bottom:1rem">🔬</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--navy);margin-bottom:0.75rem">Lactoferrin Patent — SALT Technology</h3>
+        <p style="color:var(--text-muted);font-size:0.9rem;line-height:1.8">Actoferrin (Lactoferrin 100mg tablets) has been granted a patent, powered by SALT technology for enhanced bioavailability — setting a new standard in healthcare solutions for this highly unstable molecule.</p>
+        <div style="margin-top:1.25rem;display:inline-flex;align-items:center;gap:0.4rem;background:var(--green-pale);border:1px solid var(--border-green);padding:0.35rem 0.85rem;border-radius:1rem;font-size:0.75rem;font-weight:700;color:var(--green-dark)">🏅 Patent Granted</div>
+      </div>
+      <div style="background:var(--white);border-radius:20px;padding:2.5rem;border:1.5px solid var(--border-green)">
+        <div style="font-size:2.5rem;margin-bottom:1rem">⚗️</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--navy);margin-bottom:0.75rem">Silver Nanoparticles — Wound Healing</h3>
+        <p style="color:var(--text-muted);font-size:0.9rem;line-height:1.8">As a major breakthrough in wound healing, Bennet has been awarded a patent for Silver Nanoparticles, pushing the frontiers of advanced wound care and antimicrobial therapy.</p>
+        <div style="margin-top:1.25rem;display:inline-flex;align-items:center;gap:0.4rem;background:var(--green-pale);border:1px solid var(--border-green);padding:0.35rem 0.85rem;border-radius:1rem;font-size:0.75rem;font-weight:700;color:var(--green-dark)">🏅 Patent Granted</div>
+      </div>
+    </div>
+    <div style="background:linear-gradient(145deg,var(--navy),var(--navy-mid));border-radius:20px;padding:3rem;color:var(--white);display:grid;grid-template-columns:auto 1fr;gap:2.5rem;align-items:center">
+      <div style="font-size:4rem">🎓</div>
+      <div>
+        <div style="font-size:0.75rem;font-weight:700;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.75rem">Research Collaboration</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;margin-bottom:0.75rem">NIPER-A Partnership</h3>
+        <p style="color:rgba(255,255,255,0.65);font-size:0.95rem;line-height:1.8">Bennet has a dedicated research collaboration with NIPER-A (National Institute of Pharmaceutical Education and Research, Ahmedabad) — marking another milestone in our journey of pharmaceutical innovation and scientific excellence.</p>
+      </div>
+    </div>
+  </div>
+  <footer style="background:var(--navy);padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center">
+    <div style="color:rgba(255,255,255,0.4);font-size:0.8rem">© 2025 Bennet Pharmaceuticals Ltd.</div>
+    <button class="btn-primary" onclick="showPage('home')">← Back to Home</button>
+  </footer>
+</div>
+
+<!-- MANUFACTURING -->
+<div id="page-manufacturing" class="page">
+  <div class="subpage-hero">
+    <div class="subpage-hero-grid"><svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice"><defs><pattern id="g3" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(174,202,29,1)" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#g3)"/></svg></div>
+    <div class="subpage-orb"></div>
+    <div class="subpage-hero-inner" style="max-width:1200px;margin:0 auto;padding:0 4rem">
+      <div>
+        <button class="subpage-back" onclick="showPage('home')">← Back to Home</button>
+        <div class="subpage-tag"><span>Our Capabilities</span></div>
+        <h1 class="subpage-title">World-Class <em>Manufacturing</em></h1>
+        <p class="subpage-subtitle">Empowering trust — together we deliver quality. Where excellence meets accessibility at our state-of-the-art Baddi facility.</p>
+      </div>
+      <div class="subpage-hero-img"><img src="https://bennetpharmaceuticals.com/Manufacturing.png" alt="Manufacturing"></div>
+    </div>
+  </div>
+  <div class="subpage-body">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:3rem">
+      <div style="background:var(--white);border-radius:16px;padding:2rem;border:1.5px solid rgba(174,202,29,0.15);text-align:center">
+        <div style="font-size:2rem;margin-bottom:0.75rem">🌍</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--navy);margin-bottom:0.5rem">Global Standards Compliance</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7">Our Baddi facility operates in line with WHO GMP, ensuring top-tier manufacturing excellence recognised worldwide.</p>
+      </div>
+      <div style="background:var(--white);border-radius:16px;padding:2rem;border:1.5px solid rgba(174,202,29,0.15);text-align:center">
+        <div style="font-size:2rem;margin-bottom:0.75rem">✅</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--navy);margin-bottom:0.5rem">Uncompromising Quality</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7">We maintain a rigorous quality assurance system, adhering to strict regulatory guidelines for every single product manufactured.</p>
+      </div>
+      <div style="background:var(--white);border-radius:16px;padding:2rem;border:1.5px solid rgba(174,202,29,0.15);text-align:center">
+        <div style="font-size:2rem;margin-bottom:0.75rem">⚙️</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--navy);margin-bottom:0.5rem">Advanced Technologies</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7">Equipped with cutting-edge machinery and precise instrumentation, we deliver healthcare solutions of exceptional innovation.</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem">
+      <div style="background:linear-gradient(145deg,var(--navy),var(--navy-mid));border-radius:20px;padding:2.5rem;color:var(--white)">
+        <div style="font-size:0.75rem;font-weight:700;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem">Contract Manufacturing</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;margin-bottom:1rem">Your Formulation, Our Excellence</h3>
+        <p style="color:rgba(255,255,255,0.65);font-size:0.9rem;line-height:1.8;margin-bottom:1.5rem">We specialise in contract manufacturing of finished formulations — tablets, capsules, liquid orals, soft gels, bi-layered and sustained-release preparations, all to the highest cGMP standards.</p>
+        <div style="font-size:0.8rem;color:rgba(255,255,255,0.5)">📧 cm@bennetpharmaceuticals.com &nbsp;·&nbsp; 📞 +91 8650107111</div>
+      </div>
+      <div style="background:linear-gradient(145deg,#1a6b4a,#0d4a32);border-radius:20px;padding:2.5rem;color:var(--white)">
+        <div style="font-size:0.75rem;font-weight:700;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem">Global Exports</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;margin-bottom:1rem">Advancing Global Healthcare</h3>
+        <p style="color:rgba(255,255,255,0.65);font-size:0.9rem;line-height:1.8;margin-bottom:1.5rem">We export top-tier pharmaceutical products to Asia, Africa, and Latin America. Open to collaborative association for all kinds of product inquiries from international markets.</p>
+        <div style="font-size:0.8rem;color:rgba(255,255,255,0.5)">📧 Export@bennetpharmaceuticals.com &nbsp;·&nbsp; 📞 +91 9625102437</div>
+      </div>
+    </div>
+  </div>
+  <footer style="background:var(--navy);padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center">
+    <div style="color:rgba(255,255,255,0.4);font-size:0.8rem">© 2025 Bennet Pharmaceuticals Ltd.</div>
+    <button class="btn-primary" onclick="showPage('home')">← Back to Home</button>
+  </footer>
+</div>
+
+<!-- PRODUCTS -->
+<div id="page-products" class="page">
+  <div class="subpage-hero">
+    <div class="subpage-hero-grid"><svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice"><defs><pattern id="g4" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(174,202,29,1)" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#g4)"/></svg></div>
+    <div class="subpage-orb"></div>
+    <div class="subpage-hero-inner" style="max-width:1200px;margin:0 auto;padding:0 4rem">
+      <div>
+        <button class="subpage-back" onclick="showPage('home')">← Back to Home</button>
+        <div class="subpage-tag"><span>Our Capabilities</span></div>
+        <h1 class="subpage-title">Empowering Lives,<br><em>Driving Affordability</em></h1>
+        <p class="subpage-subtitle">500+ SKUs across 11 therapeutic areas — delivering high-quality, innovative pharmaceutical solutions for healthcare professionals and patients alike.</p>
+      </div>
+      <div class="subpage-hero-img"><img src="https://bennetpharmaceuticals.com/producthero.png" alt="Products"></div>
+    </div>
+  </div>
+  <div class="subpage-body">
+    <p style="color:var(--text-muted);font-size:1rem;line-height:1.8;margin-bottom:2.5rem;max-width:720px">At Bennet Pharmaceuticals, we are dedicated to delivering high-quality, innovative pharmaceutical solutions across various therapeutic areas. Our broad product portfolio meets the diverse needs of healthcare professionals and patients alike, ensuring accessibility and reliability in every product we offer.</p>
+    <div class="products-tabs" id="productTabs">
+      <button class="ptab active" onclick="switchTab(this,'gp')">General Physician</button>
+      <button class="ptab" onclick="switchTab(this,'gynaec')">Gynecologist</button>
+      <button class="ptab" onclick="switchTab(this,'paed')">Paediatrician</button>
+      <button class="ptab" onclick="switchTab(this,'surgeon')">Surgeon</button>
+      <button class="ptab" onclick="switchTab(this,'ortho')">Orthopedic</button>
+      <button class="ptab" onclick="switchTab(this,'dental')">Dentist</button>
+      <button class="ptab" onclick="switchTab(this,'ophthal')">Ophthalmologist</button>
+      <button class="ptab" onclick="switchTab(this,'onco')">Oncology</button>
+      <button class="ptab" onclick="switchTab(this,'derm')">Dermatologist</button>
+    </div>
+    <!-- GP -->
+    <div class="ptab-content active" id="tab-gp">
+      <div class="medicines-grid">
+        <div class="med-card"><div class="med-name">Azidep-500</div><div class="med-composition">Azithromycin 500mg Tablets</div><div class="med-type">Antibiotic</div></div>
+        <div class="med-card"><div class="med-name">Levonet-500</div><div class="med-composition">Levofloxacin 500mg Tablets</div><div class="med-type">Antibiotic</div></div>
+        <div class="med-card"><div class="med-name">Nicet-OD</div><div class="med-composition">Nitazoxanide 500mg Tablets</div><div class="med-type">Antiprotozoal</div></div>
+        <div class="med-card"><div class="med-name">Ketopher-P</div><div class="med-composition">Ketoprofen + Paracetamol Tablets</div><div class="med-type">NSAID / Analgesic</div></div>
+        <div class="med-card"><div class="med-name">Broxine-AM</div><div class="med-composition">Ambroxol + Cetirizine Syrup</div><div class="med-type">Mucolytic / Antihistamine</div></div>
+        <div class="med-card"><div class="med-name">Livalo</div><div class="med-composition">Silymarin + B-Complex Tablets</div><div class="med-type">Hepatoprotective</div></div>
+        <div class="med-card"><div class="med-name">Dinsa Activ</div><div class="med-composition">Multivitamin + Multimineral Capsules</div><div class="med-type">Nutraceutical</div></div>
+        <div class="med-card"><div class="med-name">Actoferrin</div><div class="med-composition">Lactoferrin 100mg Tablets (SALT tech)</div><div class="med-type">Nutraceutical · Patent</div></div>
+      </div>
+    </div>
+    <!-- GYNAEC -->
+    <div class="ptab-content" id="tab-gynaec">
+      <div class="medicines-grid">
+        <div class="med-card"><div class="med-name">Terzo</div><div class="med-composition">Progesterone 200mg SR Capsules</div><div class="med-type">Progestogen</div></div>
+        <div class="med-card"><div class="med-name">Terzo-DS</div><div class="med-composition">Progesterone 400mg SR Capsules</div><div class="med-type">Progestogen</div></div>
+        <div class="med-card"><div class="med-name">Azidep-OD</div><div class="med-composition">Azithromycin 1000mg Tablets</div><div class="med-type">Antibiotic</div></div>
+        <div class="med-card"><div class="med-name">Dinsa Activ-G</div><div class="med-composition">Iron + Folic Acid + Multivitamin</div><div class="med-type">Nutritional Supplement</div></div>
+        <div class="med-card"><div class="med-name">Nicet-Susp</div><div class="med-composition">Nitazoxanide 100mg/5ml Suspension</div><div class="med-type">Antiprotozoal</div></div>
+        <div class="med-card"><div class="med-name">Levonet-250</div><div class="med-composition">Levofloxacin 250mg Tablets</div><div class="med-type">Antibiotic</div></div>
+      </div>
+    </div>
+    <!-- PAED -->
+    <div class="ptab-content" id="tab-paed">
+      <div class="medicines-grid">
+        <div class="med-card"><div class="med-name">Hynorax Drops</div><div class="med-composition">Hyoscine-N-Butylbromide 10mg/ml Drops</div><div class="med-type">Antispasmodic</div></div>
+        <div class="med-card"><div class="med-name">Nicet Suspension</div><div class="med-composition">Nitazoxanide 100mg/5ml Suspension</div><div class="med-type">Antiprotozoal</div></div>
+        <div class="med-card"><div class="med-name">Broxine Syrup</div><div class="med-composition">Ambroxol HCl 15mg/5ml Syrup</div><div class="med-type">Mucolytic</div></div>
+        <div class="med-card"><div class="med-name">Azidep Suspension</div><div class="med-composition">Azithromycin 200mg/5ml Dry Suspension</div><div class="med-type">Antibiotic</div></div>
+        <div class="med-card"><div class="med-name">Dinsa Activ-Kid</div><div class="med-composition">Paediatric Multivitamin Drops</div><div class="med-type">Nutritional Supplement</div></div>
+        <div class="med-card"><div class="med-name">Levonet Syrup</div><div class="med-composition">Levocetirizine 2.5mg/5ml Syrup</div><div class="med-type">Antihistamine</div></div>
+      </div>
+    </div>
+    <!-- SURGEON -->
+    <div class="ptab-content" id="tab-surgeon">
+      <div class="medicines-grid">
+        <div class="med-card"><div class="med-name">Granirex Injection</div><div class="med-composition">Granisetron 1mg/ml Injection</div><div class="med-type">Antiemetic</div></div>
+        <div class="med-card"><div class="med-name">Anset Injection</div><div class="med-composition">Ondansetron 2mg/ml Injection</div><div class="med-type">Antiemetic</div></div>
+        <div class="med-card"><div class="med-name">Clid Injection</div><div class="med-composition">Clindamycin 150mg/ml Injection</div><div class="med-type">Antibiotic</div></div>
+        <div class="med-card"><div class="med-name">Ketopher Injection</div><div class="med-composition">Ketoprofen 100mg/2ml Injection</div><div class="med-type">NSAID / Analgesic</div></div>
+        <div class="med-card"><div class="med-name">Levonet IV</div><div class="med-composition">Levofloxacin 500mg/100ml Infusion</div><div class="med-type">Antibiotic</div></div>
+        <div class="med-card"><div class="med-name">Dupox Gel</div><div class="med-composition">Diclofenac + Linseed Oil Gel</div><div class="med-type">Topical NSAID</div></div>
+      </div>
+    </div>
+    <!-- ORTHO -->
+    <div class="ptab-content" id="tab-ortho">
+      <div class="medicines-grid">
+        <div class="med-card"><div class="med-name">Ketopher-P</div><div class="med-composition">Ketoprofen + Paracetamol Tablets</div><div class="med-type">NSAID / Analgesic</div></div>
+        <div class="med-card"><div class="med-name">Dupox Gel</div><div class="med-composition">Diclofenac + Linseed Oil Gel</div><div class="med-type">Topical NSAID</div></div>
+        <div class="med-card"><div class="med-name">Dinsa Activ-OA</div><div class="med-composition">Glucosamine + Chondroitin + MSM</div><div class="med-type">Joint Support</div></div>
+        <div class="med-card"><div class="med-name">Levonet-500</div><div class="med-composition">Levofloxacin 500mg Tablets</div><div class="med-type">Antibiotic</div></div>
+        <div class="med-card"><div class="med-name">Actoferrin</div><div class="med-composition">Lactoferrin 100mg Tablets</div><div class="med-type">Bone Health · Patent</div></div>
+        <div class="med-card"><div class="med-name">Anset Injection</div><div class="med-composition">Ondansetron 2mg/ml Injection</div><div class="med-type">Antiemetic</div></div>
+      </div>
+    </div>
+    <!-- DENTAL -->
+    <div class="ptab-content" id="tab-dental">
+      <div class="medicines-grid">
+        <div class="med-card"><div class="med-name">Azidep-500</div><div class="med-composition">Azithromycin 500mg Tablets</div><div class="med-type">Antibiotic</div></div>
+        <div class="med-card"><div class="med-name">Ketopher-P</div><div class="med-composition">Ketoprofen + Paracetamol Tablets</div><div class="med-type">Analgesic</div></div>
+        <div class="med-card"><div class="med-name">Clid-300</div><div class="med-composition">Clindamycin 300mg Capsules</div><div class="med-type">Antibiotic</div></div>
+        <div class="med-card"><div class="med-name">Dupox Gel</div><div class="med-composition">Diclofenac Gel (Oral Grade)</div><div class="med-type">Topical Analgesic</div></div>
+        <div class="med-card"><div class="med-name">Levonet-500</div><div class="med-composition">Levofloxacin 500mg Tablets</div><div class="med-type">Antibiotic</div></div>
+      </div>
+    </div>
+    <!-- OPHTHAL -->
+    <div class="ptab-content" id="tab-ophthal">
+      <div class="medicines-grid">
+        <div class="med-card"><div class="med-name">Levonet Eye Drops</div><div class="med-composition">Levofloxacin 0.5% Eye Drops</div><div class="med-type">Antibiotic</div></div>
+        <div class="med-card"><div class="med-name">Azidep Eye Drops</div><div class="med-composition">Azithromycin 1% Eye Drops</div><div class="med-type">Antibiotic</div></div>
+        <div class="med-card"><div class="med-name">Ketopher Eye Drops</div><div class="med-composition">Ketorolac 0.5% Eye Drops</div><div class="med-type">NSAID Eye Drop</div></div>
+        <div class="med-card"><div class="med-name">Dinsa Activ-Eye</div><div class="med-composition">Lutein + Zeaxanthin + Vitamins</div><div class="med-type">Nutritional Supplement</div></div>
+      </div>
+    </div>
+    <!-- ONCO -->
+    <div class="ptab-content" id="tab-onco">
+      <div class="medicines-grid">
+        <div class="med-card"><div class="med-name">Granirex Injection</div><div class="med-composition">Granisetron 1mg/ml Injection</div><div class="med-type">Antiemetic (Chemo)</div></div>
+        <div class="med-card"><div class="med-name">Anset Injection</div><div class="med-composition">Ondansetron 2mg/ml Injection</div><div class="med-type">Antiemetic (Chemo)</div></div>
+        <div class="med-card"><div class="med-name">Actoferrin</div><div class="med-composition">Lactoferrin 100mg Tablets</div><div class="med-type">Supportive Therapy · Patent</div></div>
+        <div class="med-card"><div class="med-name">Dinsa Activ</div><div class="med-composition">Multivitamin + Multimineral</div><div class="med-type">Nutritional Support</div></div>
+        <div class="med-card"><div class="med-name">Levonet IV</div><div class="med-composition">Levofloxacin 500mg/100ml Infusion</div><div class="med-type">Antibiotic</div></div>
+      </div>
+    </div>
+    <!-- DERM -->
+    <div class="ptab-content" id="tab-derm">
+      <div class="medicines-grid">
+        <div class="med-card"><div class="med-name">Proticort-B</div><div class="med-composition">Betamethasone + Clotrimazole Cream</div><div class="med-type">Antifungal / Steroid</div></div>
+        <div class="med-card"><div class="med-name">Dupox Gel</div><div class="med-composition">Diclofenac + Linseed Oil Gel</div><div class="med-type">Topical NSAID</div></div>
+        <div class="med-card"><div class="med-name">Azidep Cream</div><div class="med-composition">Azelaic Acid 15% Cream</div><div class="med-type">Keratolytic</div></div>
+        <div class="med-card"><div class="med-name">Levonet-500</div><div class="med-composition">Levofloxacin 500mg Tablets</div><div class="med-type">Antibiotic</div></div>
+        <div class="med-card"><div class="med-name">Actoferrin</div><div class="med-composition">Silver Nanoparticle Wound Gel</div><div class="med-type">Wound Healing · Patent</div></div>
+      </div>
+    </div>
+  </div>
+  <footer style="background:var(--navy);padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center">
+    <div style="color:rgba(255,255,255,0.4);font-size:0.8rem">© 2025 Bennet Pharmaceuticals Ltd.</div>
+    <button class="btn-primary" onclick="showPage('home')">← Back to Home</button>
+  </footer>
+</div>
+
+<!-- NETWORK -->
+<div id="page-network" class="page">
+  <div class="subpage-hero">
+    <div class="subpage-hero-grid"><svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice"><defs><pattern id="g5" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(174,202,29,1)" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#g5)"/></svg></div>
+    <div class="subpage-orb"></div>
+    <div class="subpage-hero-inner" style="max-width:1200px;margin:0 auto;padding:0 4rem">
+      <div>
+        <button class="subpage-back" onclick="showPage('home')">← Back to Home</button>
+        <div class="subpage-tag"><span>Our Capabilities</span></div>
+        <h1 class="subpage-title">Our Reach,<br><em>Your Access</em></h1>
+        <p class="subpage-subtitle">Our extensive network connects research, innovation, and production facilities across the globe, ensuring seamless collaboration and accessibility.</p>
+      </div>
+    </div>
+  </div>
+  <div class="subpage-body">
+    <div class="network-stats">
+      <div class="nstat"><span class="nstat-num">500+</span><span class="nstat-label">SKU &amp; Products</span></div>
+      <div class="nstat"><span class="nstat-num">500+</span><span class="nstat-label">Passionate Representatives</span></div>
+      <div class="nstat"><span class="nstat-num">1000+</span><span class="nstat-label">Distributors Network</span></div>
+      <div class="nstat"><span class="nstat-num">1,00,000+</span><span class="nstat-label">Retail Outlets</span></div>
+      <div class="nstat"><span class="nstat-num">15+</span><span class="nstat-label">States Distributed</span></div>
+    </div>
+    <div style="background:var(--white);border-radius:20px;padding:3rem;border:1.5px solid rgba(174,202,29,0.15);margin-bottom:2rem">
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:var(--navy);margin-bottom:1rem">Empowering Communities Nationwide</h3>
+      <p style="color:var(--text-muted);font-size:0.95rem;line-height:1.85;margin-bottom:1.25rem">Our extensive Network connects research, innovation, and production facilities across the globe, ensuring seamless collaboration and knowledge sharing. We work closely with industry leaders, universities, and technology hubs to accelerate breakthroughs and bring them to market faster.</p>
+      <p style="color:var(--text-muted);font-size:0.95rem;line-height:1.85">Join us on our mission to empower individuals and communities through trusted healthcare. With presence in 15+ states and partnerships spanning Asia, Africa, and Latin America, we are truly bridging the gap between quality healthcare and every Indian citizen.</p>
+    </div>
+    <div style="background:linear-gradient(145deg,var(--navy),var(--navy-mid));border-radius:20px;padding:2.5rem;color:var(--white);text-align:center">
+      <div style="font-size:0.75rem;font-weight:700;color:var(--green);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem">Want to join our network?</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;margin-bottom:1rem">Become a Distribution Partner</h3>
+      <p style="color:rgba(255,255,255,0.65);font-size:0.95rem;margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto">We are actively expanding our distribution network across India and internationally. Reach out to us to explore partnership opportunities.</p>
+      <a href="mailto:info@bennetpharmaceuticals.com" class="btn-primary">Get In Touch</a>
+    </div>
+  </div>
+  <footer style="background:var(--navy);padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center">
+    <div style="color:rgba(255,255,255,0.4);font-size:0.8rem">© 2025 Bennet Pharmaceuticals Ltd.</div>
+    <button class="btn-primary" onclick="showPage('home')">← Back to Home</button>
+  </footer>
+</div>
+
+<script>
+// ── GALLERY IMAGES
+const galleryImgs = Array.from({length:15},(_,i)=>`https://bennetpharmaceuticals.com/event${i+1}.jpg`);
+const grid = document.getElementById('galleryGrid');
+galleryImgs.forEach((src,i)=>{
+  const item = document.createElement('div');
+  item.className = 'gitem';
+  item.innerHTML = `<div class="gitem-inner"><img src="${src}" alt="Event ${i+1}" loading="lazy" onerror="this.parentElement.parentElement.style.display='none'"><div class="goverlay"><div class="gnum">Event ${String(i+1).padStart(2,'0')}</div></div></div>`;
+  item.addEventListener('click',()=>openLightbox(i));
+  grid.appendChild(item);
+});
+
+// ── LIGHTBOX
+let lbCurrent = 0;
+function openLightbox(i){
+  lbCurrent = i;
+  document.getElementById('lb-img').src = galleryImgs[i];
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow='';
+}
+function lbNav(dir){
+  lbCurrent = (lbCurrent+dir+galleryImgs.length)%galleryImgs.length;
+  document.getElementById('lb-img').src = galleryImgs[lbCurrent];
+}
+document.getElementById('lightbox').addEventListener('click',e=>{if(e.target.id==='lightbox')closeLightbox()});
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('lightbox').classList.contains('open'))return;
+  if(e.key==='Escape')closeLightbox();
+  if(e.key==='ArrowRight')lbNav(1);
+  if(e.key==='ArrowLeft')lbNav(-1);
+});
+
+// ── TESTIMONIAL SLIDER
+let testiCurrent = 0;
+const slides = document.querySelectorAll('.tcard');
+const dotsContainer = document.getElementById('testiDots');
+slides.forEach((_,i)=>{
+  const d = document.createElement('div');
+  d.className='tdot'+(i===0?' active':'');
+  d.onclick=()=>goTesti(i);
+  dotsContainer.appendChild(d);
+});
+function goTesti(n){
+  testiCurrent=n;
+  document.getElementById('testiSlides').style.transform=`translateX(-${n*100}%)`;
+  document.querySelectorAll('.tdot').forEach((d,i)=>d.classList.toggle('active',i===n));
+}
+function testiNav(dir){goTesti((testiCurrent+dir+slides.length)%slides.length)}
+let autoTesti=setInterval(()=>testiNav(1),5000);
+document.querySelector('.testi-slider')?.addEventListener('mouseenter',()=>clearInterval(autoTesti));
+document.querySelector('.testi-slider')?.addEventListener('mouseleave',()=>{autoTesti=setInterval(()=>testiNav(1),5000)});
+
+// ── SPA ROUTING
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  const nav=document.getElementById('navbar');
+  if(name==='home'){nav.classList.remove('dark')}else{nav.classList.add('dark')}
+  initObservers();
+}
+function showSubpage(name){
+  showPage(name);
+}
+function scrollToSection(id){
+  setTimeout(()=>{
+    const el=document.getElementById(id);
+    if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+  },100);
+}
+
+// ── DROPDOWN TOGGLE
+function toggleDropdown(e){
+  e.stopPropagation();
+  document.getElementById('capMenu').classList.toggle('open');
+}
+function closeDropdown(){
+  const m=document.getElementById('capMenu');
+  if(m)m.classList.remove('open');
+}
+document.addEventListener('click',e=>{
+  const dd=document.getElementById('capDropdown');
+  if(dd&&!dd.contains(e.target))closeDropdown();
+});
+
+// ── CONTACT FORM SUBMIT (Formspree — works locally & hosted)
+async function submitContactForm(){
+  const fname=document.getElementById('cf_fname').value.trim();
+  const lname=document.getElementById('cf_lname').value.trim();
+  const email=document.getElementById('cf_email').value.trim();
+  const phone=document.getElementById('cf_phone').value.trim();
+  const type=document.getElementById('cf_type').value;
+  const msg=document.getElementById('cf_msg').value.trim();
+  const status=document.getElementById('cf_status');
+  const btn=document.getElementById('cf_btn');
+
+  if(!fname||!email||!msg){
+    status.style.cssText='display:block;background:#FEE2E2;color:#991B1B;padding:0.75rem 1rem;border-radius:10px;font-size:0.875rem;font-weight:600;margin-bottom:1rem;text-align:center';
+    status.textContent='Please fill in your name, email, and message.';
+    return;
+  }
+
+  btn.textContent='Sending…';btn.disabled=true;
+  status.style.display='none';
+
+  try{
+    const res=await fetch('https://formspree.io/f/xdkogwrz',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({
+        name:`${fname} ${lname}`,
+        email,phone:phone||'—',
+        enquiry:type||'General',
+        message:msg,
+        _replyto:email,
+        _subject:`Bennet Website Enquiry – ${type||'General'} from ${fname} ${lname}`
+      })
+    });
+    if(res.ok){
+      status.style.cssText='display:block;background:#DCFCE7;color:#166534;padding:0.75rem 1rem;border-radius:10px;font-size:0.875rem;font-weight:600;margin-bottom:1rem;text-align:center';
+      status.textContent='✓ Message sent! We will get back to you shortly.';
+      ['cf_fname','cf_lname','cf_email','cf_phone','cf_type','cf_msg'].forEach(id=>{document.getElementById(id).value='';});
+    }else{throw new Error('Formspree error');}
+  }catch(e){
+    // Mailto fallback — always works, even offline
+    const body=`Name: ${fname} ${lname}\nEmail: ${email}\nPhone: ${phone||'—'}\nEnquiry: ${type||'General'}\n\nMessage:\n${msg}`;
+    window.location.href='mailto:jainvishesh2006@gmail.com'
+      +'?subject='+encodeURIComponent(`Bennet Enquiry – ${type||'General'} from ${fname} ${lname}`)
+      +'&body='+encodeURIComponent(body);
+    status.style.cssText='display:block;background:#FEF9C3;color:#713F12;padding:0.75rem 1rem;border-radius:10px;font-size:0.875rem;font-weight:600;margin-bottom:1rem;text-align:center';
+    status.textContent='Opening your email app — click Send to complete.';
+  }
+  btn.textContent='Send Message →';btn.disabled=false;
+}
+
+// ── NAV SCROLL
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{
+  const home=document.getElementById('page-home').classList.contains('active');
+  if(home)navbar.classList.toggle('scrolled',window.scrollY>80);
+});
+
+// ── MOBILE MENU
+function toggleMenu(){
+  const l=document.querySelector('.nav-links');
+  if(!l)return;
+  if(l.style.display==='flex'){l.style.display='none'}
+  else{l.style.cssText='display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(27,46,75,0.99);padding:2rem;gap:1.5rem;backdrop-filter:blur(12px);z-index:999'}
+}
+
+// ── PRODUCTS TAB
+function switchTab(btn,id){
+  document.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.ptab-content').forEach(c=>c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
+}
+
+// ── REVEAL + CORE VALUES OBSERVER
+function initObservers(){
+  // Reveal
+  const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+  document.querySelectorAll('.reveal').forEach(r=>{r.classList.remove('visible');ro.observe(r)});
+
+  // Core values flip-in
+  const vo=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in-view')}),{threshold:0.15});
+  document.querySelectorAll('.vcard').forEach(c=>{c.classList.remove('in-view');vo.observe(c)});
+
+  // Counter
+  const co=new IntersectionObserver(e=>e.forEach(x=>{
+    if(x.isIntersecting&&!x.target.dataset.done){
+      x.target.dataset.done=1;
+      const t=parseInt(x.target.dataset.target),d=1800,s=performance.now();
+      const a=n=>{const p=Math.min((n-s)/d,1),v=Math.round((1-Math.pow(1-p,3))*t);
+        x.target.textContent=v>=1000?v.toLocaleString('en-IN'):v;
+        p<1?requestAnimationFrame(a):x.target.textContent=t>=1000?t.toLocaleString('en-IN'):t};
+      requestAnimationFrame(a);
+    }
+  }),{threshold:0.5});
+  document.querySelectorAll('.counter').forEach(c=>{delete c.dataset.done;co.observe(c)});
+}
+initObservers();
+</script>
+</body>
+</html>
